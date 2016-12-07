@@ -18,6 +18,7 @@ export default function Day({
   tabIndex,
   empty,
   modifiers,
+  classes = {},
   onMouseEnter,
   onMouseLeave,
   onClick,
@@ -30,8 +31,7 @@ export default function Day({
   ariaSelected,
   children,
 }) {
-  let className = 'DayPicker-Day';
-  className += modifiers.map(modifier => ` ${className}--${modifier}`).join('');
+  let className = `${classes.day} ${modifiers.map(modifier => classes[modifier]).join(' ')}`;
   if (empty) {
     return <div role="gridcell" aria-disabled className={ className } />;
   }
@@ -65,6 +65,7 @@ Day.propTypes = {
   ariaSelected: PropTypes.bool,
   empty: PropTypes.bool,
   modifiers: PropTypes.array,
+  classes: PropTypes.object,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   onMouseEnter: PropTypes.func,
@@ -78,4 +79,5 @@ Day.propTypes = {
 Day.defaultProps = {
   modifiers: [],
   empty: false,
+  classes: {},
 };

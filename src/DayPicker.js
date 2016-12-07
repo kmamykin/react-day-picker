@@ -57,9 +57,8 @@ export default class DayPicker extends Component {
     captionElement: PropTypes.element,
 
     dir: PropTypes.string,
-    className: PropTypes.string,
     tabIndex: PropTypes.number,
-
+    classes: PropTypes.object,
   };
 
   static defaultProps = {
@@ -77,6 +76,7 @@ export default class DayPicker extends Component {
     weekdayElement: <Weekday />,
     navbarElement: <Navbar />,
     captionElement: <Caption />,
+    classes: {},
   };
 
   constructor(props) {
@@ -114,6 +114,7 @@ export default class DayPicker extends Component {
   }
 
   getDayNodes() {
+    // TODO: replace this selector?
     return this.dayPicker.querySelectorAll('.DayPicker-Day:not(.DayPicker-Day--outside)');
   }
 
@@ -348,11 +349,12 @@ export default class DayPicker extends Component {
       localeUtils,
       canChangeMonth,
       navbarElement,
+      classes,
     ...attributes } = this.props;
 
     if (!canChangeMonth) return null;
     const props = {
-      className: 'DayPicker-NavBar',
+      classes: classes,
       nextMonth: this.getNextNavigableMonth(),
       previousMonth: this.getPreviousNavigableMonth(),
       showPreviousButton: this.allowPreviousMonth(),
@@ -394,7 +396,7 @@ export default class DayPicker extends Component {
         day={ day }
         modifiers={ dayModifiers }
         empty={ isOutside && !this.props.enableOutsideDays && !this.props.fixedWeeks }
-
+        classes={ this.props.classes }
         tabIndex={ tabIndex }
 
         ariaLabel={ this.props.localeUtils.formatDay(day, this.props.locale) }
@@ -433,9 +435,7 @@ export default class DayPicker extends Component {
           firstDayOfWeek={ firstDayOfWeek }
           fixedWeeks={ this.props.fixedWeeks }
 
-          className="DayPicker-Month"
-          wrapperClassName="DayPicker-Body"
-          weekClassName="DayPicker-Week"
+          classes={ this.props.classes }
 
           weekdayComponent={ this.props.weekdayComponent }
           weekdayElement={ this.props.weekdayElement }
@@ -455,13 +455,12 @@ export default class DayPicker extends Component {
 
   render() {
     const customProps = Helpers.getCustomProps(this.props, DayPicker.propTypes);
-    let className = `DayPicker DayPicker--${this.props.locale}`;
+    // TODO: how to handle locale classes
+    let className = this.props.classes.container || ''; // `DayPicker DayPicker--${this.props.locale}`;
 
+    // TODO: move this logic to the Day component
     if (!this.props.onDayClick) {
       className = `${className} DayPicker--interactionDisabled`;
-    }
-    if (this.props.className) {
-      className = `${className} ${this.props.className}`;
     }
 
     return (

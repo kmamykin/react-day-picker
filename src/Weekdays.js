@@ -7,6 +7,7 @@ export default function Weekdays({
   weekdaysShort,
   locale,
   localeUtils,
+  classes = {},
   weekdayElement,
 }) {
   const days = [];
@@ -14,7 +15,7 @@ export default function Weekdays({
     const weekday = (i + firstDayOfWeek) % 7;
     const elementProps = {
       key: i,
-      className: 'DayPicker-Weekday',
+      className: classes.weekday,
       weekday,
       weekdaysLong,
       weekdaysShort,
@@ -26,8 +27,8 @@ export default function Weekdays({
   }
 
   return (
-    <div className="DayPicker-Weekdays" role="rowgroup">
-      <div className="DayPicker-WeekdaysRow" role="columnheader">
+    <div className={ classes.weekdays } role="rowgroup">
+      <div className={ classes.weekdaysRow } role="columnheader">
         {days}
       </div>
     </div>
@@ -40,5 +41,6 @@ Weekdays.propTypes = {
   weekdaysShort: PropTypes.arrayOf(PropTypes.string),
   locale: PropTypes.string.isRequired,
   localeUtils: DayPickerPropTypes.localeUtils.isRequired,
+  classes: PropTypes.object,
   weekdayElement: PropTypes.element,
 };

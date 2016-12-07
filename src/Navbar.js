@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
 
-const buttonBaseClass = 'DayPicker-NavButton DayPicker-NavButton';
-
 export default function Navbar({
-  className,
+  classes,
   showPreviousButton,
   showNextButton,
   onPreviousClick,
@@ -17,7 +15,7 @@ export default function Navbar({
     <span
       role="button"
       key="previous"
-      className={ `${buttonBaseClass}--prev` }
+      className={ classes.navbarPrev }
       onClick={ () => previousClickHandler() }
     />;
 
@@ -25,19 +23,19 @@ export default function Navbar({
     <span
       role="button"
       key="right"
-      className={ `${buttonBaseClass}--next` }
+      className={ classes.navbarNext }
       onClick={ () => nextClickHandler() }
     />;
 
   return (
-    <div className={ className }>
+    <div className={ classes.navbar }>
       {dir === 'rtl' ? [nextButton, previousButton] : [previousButton, nextButton]}
     </div>
   );
 }
 
 export const NavbarPropTypes = {
-  className: PropTypes.string,
+  classes: PropTypes.object,
   showPreviousButton: PropTypes.bool,
   showNextButton: PropTypes.bool,
   onPreviousClick: PropTypes.func,
@@ -48,7 +46,7 @@ export const NavbarPropTypes = {
 Navbar.propTypes = NavbarPropTypes;
 
 Navbar.defaultProps = {
-  className: 'DayPicker-NavBar',
+  classes: {},
   dir: 'ltr',
   showPreviousButton: true,
   showNextButton: true,

@@ -14,9 +14,7 @@ export default function Month({
   onCaptionClick,
   children,
   firstDayOfWeek,
-  className,
-  wrapperClassName,
-  weekClassName,
+  classes = {},
   weekdayElement,
   fixedWeeks,
 }) {
@@ -26,10 +24,11 @@ export default function Month({
     localeUtils,
     locale,
     onClick: onCaptionClick ? e => onCaptionClick(e, month) : undefined,
+    classes,
   };
   const weeks = getWeekArray(month, firstDayOfWeek, fixedWeeks);
   return (
-    <div className={ className }>
+    <div className={ classes.month }>
       {React.cloneElement(captionElement, captionProps)}
       <Weekdays
         weekdaysShort={ weekdaysShort }
@@ -37,12 +36,13 @@ export default function Month({
         firstDayOfWeek={ firstDayOfWeek }
         locale={ locale }
         localeUtils={ localeUtils }
+        classes={ classes }
         weekdayElement={ weekdayElement }
       />
-      <div className={ wrapperClassName } role="grid">
+      <div className={ classes.body } role="grid">
         {
           weeks.map((week, j) =>
-            <div key={ j } className={ weekClassName } role="gridcell">
+            <div key={ j } className={ classes.week } role="gridcell">
               {week.map(day => children(day, month))}
             </div>,
         )}
@@ -62,9 +62,7 @@ Month.propTypes = {
   localeUtils: DayPickerPropTypes.localeUtils.isRequired,
   onCaptionClick: PropTypes.func,
   children: PropTypes.func.isRequired,
-  className: PropTypes.string,
-  wrapperClassName: PropTypes.string,
-  weekClassName: PropTypes.string,
+  classes: PropTypes.object,
   weekdayElement: PropTypes.element,
   fixedWeeks: PropTypes.bool,
 };
