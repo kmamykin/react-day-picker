@@ -455,15 +455,14 @@ export default class DayPicker extends Component {
 
   render() {
     const customProps = Helpers.getCustomProps(this.props, DayPicker.propTypes);
-    // TODO: how to handle locale classes
-    let className = this.props.classes.container || ''; // `DayPicker DayPicker--${this.props.locale}`;
 
     return (
       <div
         { ...customProps }
-        className={ className }
+        className={ this.props.classes.container }
         ref={ (el) => { this.dayPicker = el; } }
         role="application"
+        lang={ this.props.locale }
         tabIndex={ this.props.canChangeMonth && this.props.tabIndex }
         onKeyDown={ this.handleKeyDown }
       >
