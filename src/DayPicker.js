@@ -354,7 +354,7 @@ export default class DayPicker extends Component {
 
     if (!canChangeMonth) return null;
     const props = {
-      classes: classes,
+      classes,
       nextMonth: this.getNextNavigableMonth(),
       previousMonth: this.getPreviousNavigableMonth(),
       showPreviousButton: this.allowPreviousMonth(),

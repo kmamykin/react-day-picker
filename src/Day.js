@@ -31,7 +31,7 @@ export default function Day({
   ariaSelected,
   children,
 }) {
-  let className = `${classes.day} ${onClick ? classes.interactive : ''} ${modifiers.map(modifier => classes[modifier]).join(' ')}`;
+  const className = `${classes.day} ${onClick ? classes.interactive : ''} ${modifiers.map(modifier => classes[modifier]).join(' ')}`;
   if (empty) {
     return <div role="gridcell" aria-disabled className={ className } />;
   }
