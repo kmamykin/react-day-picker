@@ -458,11 +458,6 @@ export default class DayPicker extends Component {
     // TODO: how to handle locale classes
     let className = this.props.classes.container || ''; // `DayPicker DayPicker--${this.props.locale}`;
 
-    // TODO: move this logic to the Day component
-    if (!this.props.onDayClick) {
-      className = `${className} DayPicker--interactionDisabled`;
-    }
-
     return (
       <div
         { ...customProps }
