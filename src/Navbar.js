@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 export default function Navbar({
-  classes,
+  theme,
   showPreviousButton,
   showNextButton,
   onPreviousClick,
@@ -15,7 +15,7 @@ export default function Navbar({
     <span
       role="button"
       key="previous"
-      className={ classes.navbarPrev }
+      className={ theme.navbarPrev }
       onClick={ () => previousClickHandler() }
     />;
 
@@ -23,19 +23,19 @@ export default function Navbar({
     <span
       role="button"
       key="right"
-      className={ classes.navbarNext }
+      className={ theme.navbarNext }
       onClick={ () => nextClickHandler() }
     />;
 
   return (
-    <div className={ classes.navbar }>
+    <div className={ theme.navbar }>
       {dir === 'rtl' ? [nextButton, previousButton] : [previousButton, nextButton]}
     </div>
   );
 }
 
 export const NavbarPropTypes = {
-  classes: PropTypes.object,
+  theme: PropTypes.object,
   showPreviousButton: PropTypes.bool,
   showNextButton: PropTypes.bool,
   onPreviousClick: PropTypes.func,
@@ -46,7 +46,7 @@ export const NavbarPropTypes = {
 Navbar.propTypes = NavbarPropTypes;
 
 Navbar.defaultProps = {
-  classes: {},
+  theme: {},
   dir: 'ltr',
   showPreviousButton: true,
   showNextButton: true,

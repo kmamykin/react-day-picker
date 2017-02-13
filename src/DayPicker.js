@@ -58,7 +58,7 @@ export default class DayPicker extends Component {
 
     dir: PropTypes.string,
     tabIndex: PropTypes.number,
-    classes: PropTypes.object,
+    theme: PropTypes.object,
   };
 
   static defaultProps = {
@@ -76,7 +76,7 @@ export default class DayPicker extends Component {
     weekdayElement: <Weekday />,
     navbarElement: <Navbar />,
     captionElement: <Caption />,
-    classes: {},
+    theme: {},
   };
 
   constructor(props) {
@@ -349,12 +349,12 @@ export default class DayPicker extends Component {
       localeUtils,
       canChangeMonth,
       navbarElement,
-      classes,
+      theme,
     ...attributes } = this.props;
 
     if (!canChangeMonth) return null;
     const props = {
-      classes,
+      theme,
       nextMonth: this.getNextNavigableMonth(),
       previousMonth: this.getPreviousNavigableMonth(),
       showPreviousButton: this.allowPreviousMonth(),
@@ -396,7 +396,7 @@ export default class DayPicker extends Component {
         day={ day }
         modifiers={ dayModifiers }
         empty={ isOutside && !this.props.enableOutsideDays && !this.props.fixedWeeks }
-        classes={ this.props.classes }
+        theme={ this.props.theme }
         tabIndex={ tabIndex }
 
         ariaLabel={ this.props.localeUtils.formatDay(day, this.props.locale) }
@@ -435,7 +435,7 @@ export default class DayPicker extends Component {
           firstDayOfWeek={ firstDayOfWeek }
           fixedWeeks={ this.props.fixedWeeks }
 
-          classes={ this.props.classes }
+          theme={ this.props.theme }
 
           weekdayComponent={ this.props.weekdayComponent }
           weekdayElement={ this.props.weekdayElement }
@@ -459,7 +459,7 @@ export default class DayPicker extends Component {
     return (
       <div
         { ...customProps }
-        className={ this.props.classes.container }
+        className={ this.props.theme.component }
         ref={ (el) => { this.dayPicker = el; } }
         role="application"
         lang={ this.props.locale }
